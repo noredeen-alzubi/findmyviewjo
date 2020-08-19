@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Stunning Views</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Car access</th>
+      <th>Free access</th>
+      <th>Serviced</th>
+      <th>Family friendly</th>
+      <th>Overlooking</th>
+      <th>City</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stunning_views.each do |stunning_view| %>
+      <tr>
+        <td><%= stunning_view.title %></td>
+        <td><%= stunning_view.description %></td>
+        <td><%= stunning_view.latitude %></td>
+        <td><%= stunning_view.longitude %></td>
+        <td><%= stunning_view.car_access %></td>
+        <td><%= stunning_view.free_access %></td>
+        <td><%= stunning_view.serviced %></td>
+        <td><%= stunning_view.family_friendly %></td>
+        <td><%= stunning_view.overlooking %></td>
+        <td><%= stunning_view.city_id %></td>
+        <td><%= link_to 'Show', stunning_view %></td>
+        <td><%= link_to 'Edit', edit_stunning_view_path(stunning_view) %></td>
+        <td><%= link_to 'Destroy', stunning_view, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stunning View', new_stunning_view_path %>

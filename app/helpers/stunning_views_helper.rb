@@ -1,0 +1,2 @@
+module StunningViewsHelper
+end
