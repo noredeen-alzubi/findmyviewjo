@@ -10,7 +10,7 @@ class StunningView < ApplicationRecord
       stunning_view.city_id = city.id
     end
   end
-  after_initialize :reverse_geocode, if: ->(stunning_view){ stunning_view.latitude.present? && (stunning_view.latitude_changed? || stunning_view.longitude_changed?) }
+  after_initialize :reverse_geocode, if: ->(stunning_view) { stunning_view.latitude.present? && (stunning_view.latitude_changed? || stunning_view.longitude_changed?) }
   validate :acceptable_images
 
   def thumbnail
@@ -21,13 +21,10 @@ class StunningView < ApplicationRecord
 
   def acceptable_images
     return unless images.attached?
+
     images.each do |image|
-      unless image.byte_size <= 1.megabyte
-        errors.add(:image, "is too big")
-      end
-      unless ACCEPTABLE_IMG_TYPES.include?(image.content_type)
-        errors.add(:image, "must be a JPEG or PNG")
-      end
+      errors.add(:image, 'is too big') unless image.byte_size <= 1.megabyte
+      errors.add(:image, 'must be a JPEG or PNG') unless ACCEPTABLE_IMG_TYPES.include?(image.content_type)
     end
   end
 end

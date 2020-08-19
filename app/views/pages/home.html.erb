@@ -1,0 +1,15 @@
+<div class="jumbotron">
+  <div class="col d-flex flex-column">
+    <div class="container">
+      <h1 class="display-4 title">Find Your Next Favorite Spot</h1>
+      <h3 class="subtitle">Stop relying on word of mouth to find stunning views in Jordan.</h3>
+    </div>
+    <div class="container text-center p-t-lg p-b-lg">
+      <%= form_with url: stunning_views_path, method: 'get', html:{class:"form-inline active-cyan-4 justify-content-center"} do |form| %>
+        <%= link_to "Find Nearby", stunning_views_path(nearby:true), class: "btn btn-primary btn-lg btn-info main mr-2" %>
+        <h4 class="mr-2 p-t-sm p-b-sm"><strong>or start with a city:</strong></h4>
+        <%= form.text_field :city, {id:"city-search", class:"form-control"} %>
+      <% end %>
+    </div>
+  </div>
+</div>

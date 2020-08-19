@@ -1,8 +1,7 @@
 <%= form_with(model: stunning_view, local: true) do |form| %>
   <% if stunning_view.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(stunning_view.errors.count, "error") %> prohibited this stunning_view from being saved:</h2>
-
+      <h2><%= pluralize(stunning_view.errors.count, "error") %> prohibited this stunning view from being saved:</h2>
       <ul>
         <% stunning_view.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -30,6 +29,16 @@
     <%= form.label :longitude %>
     <%= form.text_field :longitude %>
   </div>
+  
+  <div class="field"><label class="control-label">Overlooking:</label>
+    <label class="radio-inline" for="overlooking_city"><input custom="true" type="radio" value="City" name="overlooking" id="overlooking_city"> City</label>
+    <label class="radio-inline" for="overlooking_downtown"><input custom="true" type="radio" value="Downtown" name="overlooking" id="overlooking_downtown"> Downtown</label>
+    <label class="radio-inline" for="overlooking_skyline"><input custom="true" type="radio" value="Skyline" name="overlooking" id="overlooking_skyline"> Skyline</label>
+    <label class="radio-inline" for="overlooking_water"><input custom="true" type="radio" value="Water" name="overlooking" id="overlooking_water"> Water</label>
+    <label class="radio-inline" for="overlooking_countryside"><input custom="true" type="radio" value="Countryside" name="overlooking" id="overlooking_countryside"> Countryside</label>
+    <label class="radio-inline" for="overlooking_airport"><input custom="true" type="radio" value="Airport" name="overlooking" id="overlooking_airport"> Airport</label>
+    <label class="radio-inline" for="overlooking_monument"><input custom="true" type="radio" value="Monument" name="overlooking" id="overlooking_monument"> Monument</label>
+  </div>
 
   <div class="field">
     <%= form.label :car_access %>
@@ -42,26 +51,21 @@
   </div>
 
   <div class="field">
-    <%= form.label :serviced %>
-    <%= form.check_box :serviced %>
-  </div>
-
-  <div class="field">
     <%= form.label :family_friendly %>
     <%= form.check_box :family_friendly %>
   </div>
 
   <div class="field">
-    <%= form.label :overlooking %>
-    <%= form.number_field :overlooking %>
+    <%= form.label :serviced %>
+    <%= form.check_box :serviced %>
   </div>
 
-  <div class="field">
-    <%= form.label :city_id %>
-    <%= form.text_field :city_id %>
-  </div>
+  <span class="images">
+    <%= form.file_field :images, multiple: true %>
+  </span>
 
   <div class="actions">
     <%= form.submit %>
   </div>
+
 <% end %>

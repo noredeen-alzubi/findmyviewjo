@@ -1,45 +1,61 @@
-<p id="notice"><%= notice %></p>
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2">
+      <br>
+      <h4 class="text-info">What kind of view are you looking for?</h4>
+      <%= bootstrap_form_tag url: '/search', custom: true do |f| %>
+        <%= f.form_group :city do %>
+          <%= f.select :city, City.all, { label: "City:", wrapper: { class: 'has-warning', data: { foo: 'bar' } } }, { class: "selectpicker" } %>
+        <% end %>
+        <%= f.form_group :overlooking, label: { text: "Overlooking:" } do %>
+          <% StunningView.overlookings.keys.map(&:camelcase).each do |o| %>
+            <%= f.radio_button :overlooking, o, label: o, custom: true, inline: true %>
+          <% end %>          
+        <% end %>
+        <%= f.form_group :car_access do %>
+          <%= f.check_box :car_access, label: "Car Access", inline: true, custom: :switch %>
+        <% end %>
+        <%= f.form_group :free_access do %>
+          <%= f.check_box :free_access, label: "Free Entry", inline: true, custom: :switch %>
+        <% end %>
+        <%= f.form_group :family_friendly, help: "Some Locations Are Louder & Busier Than Others." do %>
+          <%= f.check_box :family_friendly, label: "Family Friendly", inline: true, custom: :switch %>
+        <% end %>
+        <%= f.form_group :serviced, help: "Gas, Food, & Emergency Services within 10 miles." do %>
+          <%= f.check_box :serviced, label: "Serviced", inline: true, custom: :switch %>
+        <% end %>
+        <%= f.submit "Filter" %>
+      <% end %>
+      <br>
+      <br>
+    </div>
+    <div class="col-sm-10">
 
-<h1>Stunning Views</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
-      <th>Car access</th>
-      <th>Free access</th>
-      <th>Serviced</th>
-      <th>Family friendly</th>
-      <th>Overlooking</th>
-      <th>City</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @stunning_views.each do |stunning_view| %>
-      <tr>
-        <td><%= stunning_view.title %></td>
-        <td><%= stunning_view.description %></td>
-        <td><%= stunning_view.latitude %></td>
-        <td><%= stunning_view.longitude %></td>
-        <td><%= stunning_view.car_access %></td>
-        <td><%= stunning_view.free_access %></td>
-        <td><%= stunning_view.serviced %></td>
-        <td><%= stunning_view.family_friendly %></td>
-        <td><%= stunning_view.overlooking %></td>
-        <td><%= stunning_view.city_id %></td>
-        <td><%= link_to 'Show', stunning_view %></td>
-        <td><%= link_to 'Edit', edit_stunning_view_path(stunning_view) %></td>
-        <td><%= link_to 'Destroy', stunning_view, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Stunning View', new_stunning_view_path %>
+      <% @stunning_views.each do |stunning_view| %>
+        <!--<a href="<%= stunning_view_path(stunning_view) %>" class="panel mh-50">
+          <img class="panel-img-top" src="<%= url_for(stunning_view.thumbnail) %>" alt="panel image cap">
+          <div class="panel-body">
+            <h3 class="panel-title"><%= stunning_view.title %></h5>
+            <p class="panel-text text-truncate"><%= stunning_view.description %></p>
+            <p class="panel-text"><small class="text-muted">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago</small></p>
+          </div>
+        </a>-->
+        <a href="<%= stunning_view_path(stunning_view) %>">
+          <div class="card card-default">
+            <div class="card-img">
+              <img src="<%= url_for(stunning_view.thumbnail) %>" class="card-img">
+            </div>
+            <div class="card-body">
+              <h3><%= stunning_view.title %></h3>
+              <p><%= stunning_view.description %></p>
+              <small class="text-muted">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago</small>
+            </div>
+          </div>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</div>
