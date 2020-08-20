@@ -39,8 +39,13 @@ gem 'image_processing'
 
 gem 'bootstrap_form', '~> 2.7'
 
+gem 'rails-jquery-autocomplete'
+
+gem 'jquery-ui-rails', '>= 4.0.0'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
