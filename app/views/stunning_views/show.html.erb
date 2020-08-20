@@ -1,54 +1,68 @@
-<p id="notice"><%= notice %></p>
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @stunning_view.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @stunning_view.description %>
-</p>
-
-<p>
-  <strong>Latitude:</strong>
-  <%= @stunning_view.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @stunning_view.longitude %>
-</p>
-
-<p>
-  <strong>Car access:</strong>
-  <%= @stunning_view.car_access %>
-</p>
-
-<p>
-  <strong>Free access:</strong>
-  <%= @stunning_view.free_access %>
-</p>
-
-<p>
-  <strong>Serviced:</strong>
-  <%= @stunning_view.serviced %>
-</p>
-
-<p>
-  <strong>Family friendly:</strong>
-  <%= @stunning_view.family_friendly %>
-</p>
-
-<p>
-  <strong>Overlooking:</strong>
-  <%= @stunning_view.overlooking %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @stunning_view.city_id %>
-</p>
-
-<%= link_to 'Edit', edit_stunning_view_path(@stunning_view) %> |
-<%= link_to 'Back', stunning_views_path %>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <% @stunning_view.images.each.with_index do |image, index| %>
+      <li data-target="#carousel-example-generic" data-slide-to="<%= index %>" class="<%= index == 0 ? "active" : "" %>"></li>
+    <% end %>
+  </ol>
+  <div class="carousel-inner" style="width:100%;max-height:650px !important">
+    <% @stunning_view.images.each.with_index do |image, index| %>
+      <div class="item<%= index == 0 ? " active" : "" %>">
+        <img class="d-block w-100" src="<%= url_for(image) %>" alt="slide<%= index %>" style="width:100%;">
+      </div>
+    <% end %>
+  </div>
+  <% if @stunning_view.images.length > 1 %>
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  <% end %>
+</div>
+<br>
+<br>
+<h1 class="text-break text-center" style="overflow-wrap: break-word;"><%= @stunning_view.title %></h1>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h4 class="text-break" style="overflow-wrap: break-word;"><%= @stunning_view.description %></h1>
+      <hr>
+      <div>
+        <h3>
+          Tags:
+          <% if @stunning_view.car_access? %>
+            <span class="label label-default">Car Access</span>
+          <% end %>
+          <% if @stunning_view.free_access? %>
+            <span class="label label-success">Free Entry</span>
+          <% end %>
+          <% if @stunning_view.family_friendly? %>
+            <span class="label label-info">Family Friendly</span>
+          <% end %>
+          <% if @stunning_view.serviced? %>
+            <span class="label label-warning">Serviced</span>
+          <% end %>
+        </h3>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="embed-responsive embed-responsive-4by3">
+        <iframe
+          class="embed-responsive-item"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key=<%= Rails.application.credentials.google_maps_api_key %>
+            &q=<%= @stunning_view.latitude %>,<%= @stunning_view.longitude %>" allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</div> 
