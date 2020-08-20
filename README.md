@@ -1,24 +1,9 @@
-# README
+# FindMyView JO
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Note:
 
-Things you may want to cover:
+> :exclamation: This is the new home of the FindMyView project. The code has been migrated to this repository ([link to the old one](https://github.com/noredeen-alzubi/findmyview)). The biggest changes include:
+* Abandoning Webpack for Sprockets. Webpack is still set up in the codebase should it become necessary as the application grows, but is not used at the moment.
+* Downgrading to Bootstrap 3 for compatability with certain important gems.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+---
