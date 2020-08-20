@@ -29,6 +29,24 @@
   display: inline-block;
 }
 
+#overlooking-icon{
+  color: goldenrod;
+}
+
+.xbootstrap {
+  text-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+  margin-top: 0;
+}
+
+//override
+.well{
+  margin-bottom: 0;
+}
+
+.navbar{
+  margin-bottom: 0;
+}
+
 
 /* === card component ====== */
 
