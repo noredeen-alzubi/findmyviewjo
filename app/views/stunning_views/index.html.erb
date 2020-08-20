@@ -43,7 +43,7 @@
             <p class="panel-text"><small class="text-muted">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago</small></p>
           </div>
         </a>-->
-        <a href="<%= stunning_view_path(stunning_view) %>">
+        <a class="card-clickable"href="<%= stunning_view_path(stunning_view) %>">
           <div class="card card-default">
             <div class="card-img">
               <img src="<%= url_for(stunning_view.thumbnail) %>" class="card-img">
