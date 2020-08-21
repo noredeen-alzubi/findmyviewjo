@@ -2,6 +2,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+$featured-bottom-gradient-color: #b4ffe8;
+$featured-top-gradient-color: #cd80af;
+
 .title, .subtitle, .city-search-text{
   color: white !important;
 }
@@ -41,6 +44,26 @@
 //override
 .well{
   margin-bottom: 0;
+}
+.carousel{
+  border-left: 5px solid $featured-bottom-gradient-color;
+  border-right: 5px solid $featured-bottom-gradient-color;
+  border-bottom: 5px solid $featured-bottom-gradient-color;
+}
+
+div.featured{
+  display:block;
+  margin: 0;
+  text-align: center;
+  color: white;
+  border-radius: 0;
+  background: $featured-top-gradient-color;
+  background: linear-gradient(180deg, $featured-top-gradient-color 0%, $featured-bottom-gradient-color 100%);
+}
+
+div.featured.h4{
+  // display:inline-block;
+  // margin: 30px;
 }
 
 .navbar{

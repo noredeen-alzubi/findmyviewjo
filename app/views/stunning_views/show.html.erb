@@ -1,6 +1,11 @@
 <% flash.each do |message_type, message| %>
   <div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>
+<% if @stunning_view.featured? %>
+  <div class="container-fluid featured m-t-lg">
+    <h4>🌟 <strong>FEATURED</strong></h4>
+  </div>
+<% end %>
 <div id="images-carousel" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <% @stunning_view.images.each.with_index do |image, index| %>
