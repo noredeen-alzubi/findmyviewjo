@@ -27,22 +27,13 @@
         <%= f.form_group :serviced, help: "Gas, Food, & Emergency Services within 10 miles." do %>
           <%= f.check_box :serviced, label: "Serviced", inline: true, custom: :switch %>
         <% end %>
-        <%= f.submit "Filter" %>
+        <%= f.submit "Search" %>
       <% end %>
       <br>
       <br>
     </div>
-    <div class="col-sm-10">
-
+    <div class="col-sm-10 m-t-sm">
       <% @stunning_views.each do |stunning_view| %>
-        <!--<a href="<%= stunning_view_path(stunning_view) %>" class="panel mh-50">
-          <img class="panel-img-top" src="<%= url_for(stunning_view.thumbnail) %>" alt="panel image cap">
-          <div class="panel-body">
-            <h3 class="panel-title"><%= stunning_view.title %></h5>
-            <p class="panel-text text-truncate"><%= stunning_view.description %></p>
-            <p class="panel-text"><small class="text-muted">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago</small></p>
-          </div>
-        </a>-->
         <a class="card-clickable"href="<%= stunning_view_path(stunning_view) %>">
           <div class="card card-default">
             <div class="card-img">

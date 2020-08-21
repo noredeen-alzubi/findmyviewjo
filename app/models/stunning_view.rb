@@ -1,6 +1,14 @@
 class StunningView < ApplicationRecord
   ACCEPTABLE_IMG_TYPES = ['image/jpeg', 'image/png'].freeze
-  OVERLOOKINGS_ICON_CLASSES = { city: 'fas fa-building', downtownw: 'fas fa-store-alt', skyline: 'fas fa-city', water: 'fas fa-water', countryside: 'fas fa-tree', airport: 'fas fa-plane', monument: 'fas fa-monument' }.freeze
+  OVERLOOKINGS_ICON_CLASSES = { 
+    city: 'fas fa-building',
+    downtownw: 'fas fa-store-alt',
+    skyline: 'fas fa-city',
+    water: 'fas fa-water',
+    countryside: 'fas fa-tree',
+    airport: 'fas fa-plane',
+    monument: 'fas fa-monument'
+  }.freeze
 
   enum overlooking: { city: 0, downtown: 1, skyline: 2, water: 3, countryside: 4, airport: 5, monument: 6 }
   belongs_to :city
