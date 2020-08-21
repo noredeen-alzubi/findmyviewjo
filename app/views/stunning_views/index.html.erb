@@ -35,10 +35,15 @@
     <div class="col-sm-10 m-t-sm">
       <% @stunning_views.each do |stunning_view| %>
         <a class="card-clickable"href="<%= stunning_view_path(stunning_view) %>">
-          <div class="card card-default">
+          <div class="card card-default<%= stunning_view.featured? ? 'featured' : '' %>">
             <div class="card-img">
               <img src="<%= url_for(stunning_view.thumbnail) %>" class="card-img">
             </div>
+            <% if stunning_view.featured? %>
+              <div class="card-header">
+                <strong>FEATURED</strong>
+              </div>
+            <% end %>
             <div class="card-body">
               <h3><%= stunning_view.title %></h3>
               <p><%= stunning_view.description %></p>

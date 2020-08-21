@@ -50,12 +50,16 @@
 
 /* === card component ====== */
 
+.card.featured{
+  border-color: goldenrod;
+}
+
 .card-clickable, .card-clickable:hover{
   color: inherit;
   text-decoration: none;
 }
 
- .card{ background-color: #fff; border: 1px solid transparent; border-radius: 6px; }
+ .card{ background-color: #fff; border: 1px solid transparent; border-radius: 6px;  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); }
  .card > .card-link{ color: #333; }
  .card > .card-link:hover{  text-decoration: none; }
  .card > .card-link .card-img img{ border-radius: 6px 6px 0 0; }
@@ -67,7 +71,7 @@
    left: 0;
  }
  .card .card-body{ display: table; width: 100%; padding: 12px; text-decoration: none; }
- .card .card-header{ border-radius: 6px 6px 0 0; padding: 8px; }
+ .card .card-header{ padding: 8px; background-color: goldenrod !important; color: white;}
  .card .card-footer{ border-radius: 0 0 6px 6px; padding: 8px; }
  .card .card-left{ position: relative; float: left; padding: 0 0 8px 0; }
  .card .card-right{ position: relative; float: left; padding: 8px 0 0 0; }
