@@ -61,9 +61,15 @@
     <%= form.check_box :serviced %>
   </div>
 
-  <span class="images">
+  <div class="field">
+    <%= form.label :thumbnail %>
+    <%= form.file_field :thumbnail %>
+  </div>
+
+  <div class="field">
+    <%= form.label :images %>
     <%= form.file_field :images, multiple: true %>
-  </span>
+  </div>
 
   <div class="actions">
     <%= form.submit %>

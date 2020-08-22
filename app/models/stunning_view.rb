@@ -13,6 +13,7 @@ class StunningView < ApplicationRecord
   enum overlooking: { city: 0, downtown: 1, skyline: 2, water: 3, countryside: 4, airport: 5, monument: 6 }
   belongs_to :city
   belongs_to :user
+  has_one_attached :thumbnail
   has_many_attached :images
   reverse_geocoded_by :latitude, :longitude do |stunning_view,results|
     if geo = results.first
@@ -22,10 +23,6 @@ class StunningView < ApplicationRecord
   end
   after_initialize :reverse_geocode, if: ->(stunning_view) { stunning_view.latitude.present? && (stunning_view.latitude_changed? || stunning_view.longitude_changed?) }
   validate :acceptable_images
-
-  def thumbnail
-    images.first
-  end
 
   def as_json(options = {})
     super(options.merge(include: [:user]))

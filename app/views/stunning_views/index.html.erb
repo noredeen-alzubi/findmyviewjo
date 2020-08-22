@@ -46,8 +46,8 @@
             <% end %>
             <div class="card-body">
               <h3><%= stunning_view.title %></h3>
-              <p><%= stunning_view.description %></p>
-              <small class="text-muted">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago</small>
+              <p style="padding-left: 3px;"><%= stunning_view.description %></p>
+              <small class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago</small>
             </div>
           </div>
         </a>

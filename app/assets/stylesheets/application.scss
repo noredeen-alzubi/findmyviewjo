@@ -52,7 +52,8 @@ $featured-top-gradient-color: #cd80af;
 .well{
   margin-bottom: 0;
 }
-.carousel{
+
+.carousel.featured{
   border-left: 5px solid $featured-bottom-gradient-color;
   border-right: 5px solid $featured-bottom-gradient-color;
   border-bottom: 5px solid $featured-bottom-gradient-color;
@@ -72,6 +73,9 @@ div.featured{
   margin-bottom: 0;
 }
 
+.carousel-inner img{
+  height: none;
+}
 
 /* === card component ====== */
 
