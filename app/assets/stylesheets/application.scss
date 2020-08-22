@@ -68,11 +68,6 @@ div.featured{
   background: linear-gradient(180deg, $featured-top-gradient-color 0%, $featured-bottom-gradient-color 100%);
 }
 
-div.featured.h4{
-  // display:inline-block;
-  // margin: 30px;
-}
-
 .navbar{
   margin-bottom: 0;
 }
@@ -149,7 +144,6 @@ div.featured.h4{
  .card-default > .card-footer{ color: #333; background-color: #ddd; }
  .card-default > .card-header{ border-bottom: 1px solid #ddd; padding: 8px; }
  .card-default > .card-footer{ border-top: 1px solid #ddd; padding: 8px; }
- .card-default > .card-body{  }
  .card-default > .card-img:first-child img{ border-radius: 6px 6px 0 0; }
  .card-default > .card-left{ padding-right: 4px; }
  .card-default > .card-right{ padding-left: 4px; }

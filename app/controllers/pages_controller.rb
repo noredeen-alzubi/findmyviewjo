@@ -4,6 +4,4 @@ class PagesController < ApplicationController
     session[:current_latitude] = 31
     session[:current_longitude] = 36
   end
-  def about
-  end
 end
