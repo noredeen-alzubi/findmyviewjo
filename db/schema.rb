@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_21_045124) do
+ActiveRecord::Schema.define(version: 2020_08_22_073651) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -53,7 +53,9 @@ ActiveRecord::Schema.define(version: 2020_08_21_045124) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "featured"
+    t.integer "user_id", null: false
     t.index ["city_id"], name: "index_stunning_views_on_city_id"
+    t.index ["user_id"], name: "index_stunning_views_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,4 +70,5 @@ ActiveRecord::Schema.define(version: 2020_08_21_045124) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "stunning_views", "cities"
+  add_foreign_key "stunning_views", "users"
 end

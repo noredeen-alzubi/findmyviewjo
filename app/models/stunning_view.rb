@@ -2,7 +2,7 @@ class StunningView < ApplicationRecord
   ACCEPTABLE_IMG_TYPES = ['image/jpeg', 'image/png'].freeze
   OVERLOOKINGS_ICON_CLASSES = { 
     city: 'fas fa-building',
-    downtownw: 'fas fa-store-alt',
+    downtown: 'fas fa-store-alt',
     skyline: 'fas fa-city',
     water: 'fas fa-water',
     countryside: 'fas fa-tree',
@@ -12,6 +12,7 @@ class StunningView < ApplicationRecord
 
   enum overlooking: { city: 0, downtown: 1, skyline: 2, water: 3, countryside: 4, airport: 5, monument: 6 }
   belongs_to :city
+  belongs_to :user
   has_many_attached :images
   reverse_geocoded_by :latitude, :longitude do |stunning_view,results|
     if geo = results.first
@@ -24,6 +25,10 @@ class StunningView < ApplicationRecord
 
   def thumbnail
     images.first
+  end
+
+  def as_json(options = {})
+    super(options.merge(include: [:user]))
   end
 
   private

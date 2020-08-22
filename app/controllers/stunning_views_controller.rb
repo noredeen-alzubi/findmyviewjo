@@ -28,7 +28,7 @@ class StunningViewsController < ApplicationController
   # POST /stunning_views
   # POST /stunning_views.json
   def create
-    @stunning_view = StunningView.new(stunning_view_params)
+    @stunning_view = StunningView.new(stunning_view_params.merge(user_id: current_user.id))
     @stunning_view.images.attach(params[:stunning_view][:images])
     respond_to do |format|
       if @stunning_view.save
@@ -66,22 +66,25 @@ class StunningViewsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_stunning_view
-      @stunning_view = StunningView.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render_404
-    end
 
-    def authorized
-      unless current_user.admin?
-        flash[:danger] = "You are not authorized to access this page."
-        redirect_to root_path
-      end
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_stunning_view
+    @stunning_view = StunningView.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render_404
+  end
 
-    # Only allow a list of trusted parameters through.
-    def stunning_view_params
-      params.require(:stunning_view).permit(:title, :description, :car_access, :latitude, :longitude, :free_access, :overlooking, :serviced, :family_friendly, images: [])
+  def authorized
+    if !logged_in?
+      redirect_to root_path
+    elsif !current_user.admin?
+      flash[:danger] = 'You are not authorized to access this page.'
+      redirect_to root_path
     end
+  end
+
+  # Only allow a list of trusted parameters through.
+  def stunning_view_params
+    params.require(:stunning_view).permit(:title, :description, :car_access, :latitude, :longitude, :free_access, :overlooking, :serviced, :family_friendly, :user_id, images: [])
+  end
 end

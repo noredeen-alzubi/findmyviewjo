@@ -31,26 +31,30 @@
   <% end %>
 </div>
 <br>
+<h1 class="text-break text-center" style="overflow-wrap: break-word;"><strong><%= @stunning_view.title %></strong></h1>
 <br>
-<h1 class="text-break text-center" style="overflow-wrap: break-word;"><%= @stunning_view.title %></h1>
+<h4 class="text-break text-center text-muted">By <%= @stunning_view.user.name %></h4>
+<% if @stunning_view.user.admin? %>
+  <h4 class="text-break text-center"><span class="align-middle site-mod">Site Moderator</span></h4>
+<% end %>
+<br>
 <br>
 <br>
 <div class="container">
   <div class="row">
     <div class="col-md-6">
       <h4 class="text-center"><i id="overlooking-icon" class="<%= StunningView::OVERLOOKINGS_ICON_CLASSES[@stunning_view.overlooking.to_sym] %> fa-3x"></i></h4>
-      <h3 class="text-center xbootstrap"><strong><%= @stunning_view.overlooking.camelcase %> View</strong></h3>
+      <h3 class="text-center xbootstrap"><%= @stunning_view.overlooking.camelcase %> View</h3>
       <br>
       <h4 class="text-break" style="overflow-wrap: break-word;"><%= @stunning_view.description %></h1>
       <hr>
       <div>
-        <h3>
-          Tags:
+        <h4>
           <% if @stunning_view.car_access? %>
             <span class="label label-default">Car Access</span>
           <% end %>
           <% if @stunning_view.free_access? %>
-            <span class="label label-success">Free Entry</span>
+            <span class="label label-primary">Free Entry</span>
           <% end %>
           <% if @stunning_view.family_friendly? %>
             <span class="label label-info">Family Friendly</span>
@@ -58,7 +62,7 @@
           <% if @stunning_view.serviced? %>
             <span class="label label-warning">Serviced</span>
           <% end %>
-        </h3>
+        </h4>
       </div>
     </div>
     <div class="col-md-6">
