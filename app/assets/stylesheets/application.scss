@@ -56,6 +56,18 @@ div.embed-responsive button{
   margin-top: 0;
 }
 
+.rounded{
+  border-radius: 18px;
+}
+
+.tooltip-wrapper{
+  display: inline-block;
+}
+
+.tooltip-wrapper [disabled] {
+  pointer-events: none;
+}
+
 //override
 .well{
   margin-bottom: 0;

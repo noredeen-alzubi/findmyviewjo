@@ -1,6 +1,8 @@
 <script>
   $(document).ready(function() {
 
+    $('[data-toggle="tooltip"]').tooltip()
+
     function setInForm(position) {
       $("#latitude").val(position.coords.latitude);
       $("#longitude").val(position.coords.longitude);
@@ -48,12 +50,14 @@
     <div class="container text-center p-t-lg p-b-lg">
       <div class="row">
         <div class="col-md-4 col-md-offset-4">
-          <div class="overlay"></div>
+          <div class="overlay rounded"></div>
           <div class="city-search m-t-xl m-b-xl">
             <%= form_with url: stunning_views_path, method: 'get' do |form| %>
-              <%= button_tag class: "btn btn-lg btn-info main mr-2", id: "nearby" do %>
-                Find Nearby <i class="fas fa-map-marker-alt"></i>
-              <% end %>
+              <span class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="You need to consent to giving us access to your location data.">
+                <%= button_tag class: "btn btn-lg btn-info main mr-2", id: "nearby" do %>
+                  Find Nearby <i class="fas fa-map-marker-alt"></i>
+                <% end %>
+              </span>
               <%= form.hidden_field :longitude, value: "" %>
               <%= form.hidden_field :latitude, value: "" %>
             <% end %>
