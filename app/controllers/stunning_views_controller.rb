@@ -37,7 +37,10 @@ class StunningViewsController < ApplicationController
     @stunning_view = StunningView.new(stunning_view_params.merge(user_id: current_user.id))
     respond_to do |format|
       if @stunning_view.save
-        format.html { redirect_to @stunning_view, notice: 'Stunning view was successfully created.' }
+        format.html do
+          redirect_to @stunning_view
+          flash[:success] = 'Stunning view was successfully created.'
+        end
         format.json { render :show, status: :created, location: @stunning_view }
       else
         format.html { render :new }
@@ -63,7 +66,11 @@ class StunningViewsController < ApplicationController
   # DELETE /stunning_views/1
   # DELETE /stunning_views/1.json
   def destroy
-    @stunning_view.destroy
+    if @stunning_view.city.stunning_views.length == 1
+      @stunning_view.city.destroy
+    else
+      @stunning_view.destroy
+    end
     respond_to do |format|
       format.html { redirect_to stunning_views_url, notice: 'Stunning view was successfully destroyed.' }
       format.json { head :no_content }
