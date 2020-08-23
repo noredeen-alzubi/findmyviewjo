@@ -18,7 +18,7 @@
           alert("The request to get your current location timed out.");
           break;
         case error.UNKNOWN_ERROR:
-          alert("An unknown error occurred.");
+          alert("An unknown error occurred with fetching your location.");
           break;
       }
     }
@@ -30,9 +30,11 @@
     }
 
     $('#city_name').bind('railsAutocomplete.select', function(event, data){
-      console.log(data.item.id)
-      $('#city_id').val(data.item.id);
-      $('#search').submit();
+      // To prevent submitting the form when selecting "no existing match"
+      if(data.item.id.length > 0){
+        $('#city_id').val(data.item.id);
+        $('#search').submit();
+      }
     });
 
   });

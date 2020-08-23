@@ -96,16 +96,7 @@
     <h4 class="text-muted"><%= @reviews.length == 0 ? "No Reviews Submitted Yet." : "Reviews (#{@reviews.length}):"%></h3>
     <ul>
       <% @reviews.each do |review| %>
-        <li>
-          <% (1..review.rating).each do %>
-            <%= image_tag 'star-on.png' %>
-          <% end %>
-          <% (5-review.rating).times do %>
-            <%= image_tag 'star-off.png' %>
-          <% end %>
-          <h5 class="text-muted">By <%= review.user.name %> on <%= review.created_at.to_s(:month_day_comma_year) %></h5>
-          <p class="text-break" style="overflow-wrap: break-word;"><%= review.text %></p>
-        </li>
+        <%= render "stunning_views/review", review: review %>
       <% end %>
     </ul>
   </div>
