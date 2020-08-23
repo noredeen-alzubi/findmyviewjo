@@ -3,9 +3,9 @@ class StunningViewsController < ApplicationController
   before_action :set_stunning_view, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:city].present?
+    if params[:city_id].present?
       # TODO: search by name for now. Switch to using a city object (from homepage)
-      @stunning_views = City.find_by(name: params[:city].camelcase).stunning_views.order created_at: :desc
+      @stunning_views = City.find_by(id: params[:city_id]).stunning_views.order created_at: :desc
     elsif params[:longitude].present? && params[:latitude].present?
       @stunning_views = StunningView.near([params[:latitude], params[:longitude]], 50).order created_at: :desc
     else

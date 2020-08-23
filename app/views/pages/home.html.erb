@@ -29,6 +29,12 @@
       $("#nearby").prop('disabled', 'disabled');
     }
 
+    $('#city_name').bind('railsAutocomplete.select', function(event, data){
+      console.log(data.item.id)
+      $('#city_id').val(data.item.id);
+      $('#search').submit();
+    });
+
   });
 </script>
 <div class="jumbotron">
@@ -43,16 +49,16 @@
           <div class="overlay"></div>
           <div class="city-search m-t-xl m-b-xl">
             <%= form_with url: stunning_views_path, method: 'get' do |form| %>
-              <%= button_tag class: "btn btn-lg btn-info main mr-2", title: "ss", id: "nearby", data: { toggle: "tooltip", placement: "top" } do %>
+              <%= button_tag class: "btn btn-lg btn-info main mr-2", id: "nearby" do %>
                 Find Nearby <i class="fas fa-map-marker-alt"></i>
               <% end %>
               <%= form.hidden_field :longitude, value: "" %>
               <%= form.hidden_field :latitude, value: "" %>
             <% end %>
-            <%= form_with url: stunning_views_path, method: 'get', html:{class:""} do |form| %>
+            <%= form_with url: stunning_views_path, method: 'get',  html: { id: "search" } do |form| %>
               <h4 class="mr-2 p-t-sm p-b-sm city-search-text"><strong>or start with a city:</strong></h4>
-              <%= form.hidden_field :city_id, id: 'my_city_id' %>
-              <%= form.autocomplete_field :city_name, autocomplete_city_name_cities_path, {id_element: 'my_city_id', class: 'form-control'} %>
+              <%= form.hidden_field :city_id, id: 'city_id' %>
+              <%= form.autocomplete_field :city_name, autocomplete_city_name_cities_path, {id_element: 'city_id', class: 'form-control'} %>
             <% end %>
           </div>
         </div>
