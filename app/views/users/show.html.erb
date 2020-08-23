@@ -1,25 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<div class="row">
-  <div class="col-md-4 col-md-offset-2">
-    <h2><strong><%= @user.name %></strong></h2>
-    <p><%= @user.email %></p>
-    <p>User since <strong><%= @user.created_at.to_s(:month_day_comma_year) %></strong></p>
-    <%= link_to 'Edit Your Information', edit_user_path(@user), class: 'btn btn-primary' %>
-  </div>
-  <div class="col-md-4">
-    <h3>All Your Submitted Reviews:</h3>
-    <br>
-    <% if @reviews.length > 0 %>
-      <ul>
-        <% @reviews.each do |review| %>
-          <p>For: <%= link_to review.stunning_view.title, stunning_view_path(review.stunning_view) %></p>
-          <%= render "stunning_views/review", review: review %>
-          <hr>
-        <% end %>
-      </ul>
-    <% else %>
-      <h4 class="text-muted">You have not reviewed any views yet :(</h3>
-    <% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-2">
+      <h2><strong><%= @user.name %></strong></h2>
+      <p><%= @user.email %></p>
+      <p>User since <strong><%= @user.created_at.to_s(:month_day_comma_year) %></strong></p>
+      <%= link_to 'Edit Your Information', edit_user_path(@user), class: 'btn btn-primary' %>
+    </div>
+    <div class="col-md-4">
+      <h3>All Your Submitted Reviews:</h3>
+      <br>
+      <% if @reviews.length > 0 %>
+        <ul>
+          <% @reviews.each do |review| %>
+            <p>For: <%= link_to review.stunning_view.title, stunning_view_path(review.stunning_view) %></p>
+            <%= render "stunning_views/review", review: review %>
+            <hr>
+          <% end %>
+        </ul>
+      <% else %>
+        <h4 class="text-muted">You have not reviewed any views yet :(</h3>
+      <% end %>
+    </div>
   </div>
 </div>
