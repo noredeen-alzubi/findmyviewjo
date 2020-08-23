@@ -50,7 +50,7 @@
             <% end %>
             <div class="card-body">
               <h3><strong><%= stunning_view.title %></strong></h3>
-              <p class="text-muted" style="padding-left: 3px;"><%= stunning_view.reviews.length > 0 ? stunning_view.reviews.length : "No" %> Reviews</p>
+              <p class="text-muted" style="padding-left: 3px;"><%= stunning_view.reviews_count > 0 ? stunning_view.reviews_count : "No" %> Reviews</p>
               <p style="padding-left: 3px;"><%= stunning_view.description %></p>
               <% if stunning_view.user.admin? %>
                 <small class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <strong><%= stunning_view.user.name %><strong> <span class="site-mod site-mod-sm">Site Moderator</span></small>
