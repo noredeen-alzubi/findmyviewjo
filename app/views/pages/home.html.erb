@@ -1,3 +1,36 @@
+<script>
+  $(document).ready(function() {
+
+    function setInForm(position) {
+      $("#latitude").val(position.coords.latitude);
+      $("#longitude").val(position.coords.longitude);
+    }
+
+    function handleErrors(error){
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          $("#nearby").prop('disabled', 'disabled');
+          break;
+        case error.POSITION_UNAVAILABLE:
+          alert("Your location information is unavailable.");
+          break;
+        case error.TIMEOUT:
+          alert("The request to get your current location timed out.");
+          break;
+        case error.UNKNOWN_ERROR:
+          alert("An unknown error occurred.");
+          break;
+      }
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(setInForm, handleErrors);
+    } else {
+      $("#nearby").prop('disabled', 'disabled');
+    }
+
+  });
+</script>
 <div class="jumbotron">
   <div class="col d-flex flex-column">
     <div class="container">
@@ -9,8 +42,14 @@
         <div class="col-md-4 col-md-offset-4">
           <div class="overlay"></div>
           <div class="city-search m-t-xl m-b-xl">
-            <%= form_with url: stunning_views_path, method: 'get', html:{class:"form-inline active-cyan-4 justify-content-center"} do |form| %>
-              <a class="btn btn-lg btn-info main mr-2" href="<%= stunning_views_path(nearby:true) %>">Find Nearby   <i class="fas fa-map-marker-alt"></i></a>
+            <%= form_with url: stunning_views_path, method: 'get' do |form| %>
+              <%= button_tag class: "btn btn-lg btn-info main mr-2", title: "ss", id: "nearby", data: { toggle: "tooltip", placement: "top" } do %>
+                Find Nearby <i class="fas fa-map-marker-alt"></i>
+              <% end %>
+              <%= form.hidden_field :longitude, value: "" %>
+              <%= form.hidden_field :latitude, value: "" %>
+            <% end %>
+            <%= form_with url: stunning_views_path, method: 'get', html:{class:""} do |form| %>
               <h4 class="mr-2 p-t-sm p-b-sm city-search-text"><strong>or start with a city:</strong></h4>
               <%= form.hidden_field :city_id, id: 'my_city_id' %>
               <%= form.autocomplete_field :city_name, autocomplete_city_name_cities_path, {id_element: 'my_city_id', class: 'form-control'} %>
