@@ -4,6 +4,7 @@
     $('[data-toggle="tooltip"]').tooltip()
 
     function setInForm(position) {
+      $('[data-toggle="tooltip"]').tooltip('destroy')
       $("#latitude").val(position.coords.latitude);
       $("#longitude").val(position.coords.longitude);
     }
