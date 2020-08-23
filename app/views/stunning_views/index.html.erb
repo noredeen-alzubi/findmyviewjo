@@ -6,14 +6,18 @@
     <div class="col-sm-2">
       <br>
       <h4 class="text-info">What kind of view are you looking for?</h4>
-      <%= bootstrap_form_tag url: '/search', custom: true do |f| %>
-        <%= f.form_group :city do %>
-          <%= f.select :city, City.all, { label: "City:", wrapper: { class: 'has-warning', data: { foo: 'bar' } } }, { class: "selectpicker" } %>
+      <%= bootstrap_form_tag url: '/search', method: 'get', custom: true do |f| %>
+        <%= f.form_group :city_id do %>
+          <%= f.collection_select :city_id, City.all, :id, :name, { label: "City:", wrapper: { class: 'has-warning' }, class: "selectpicker" } %>
         <% end %>
         <%= f.form_group :overlooking, label: { text: "Overlooking:" } do %>
-          <% StunningView.overlookings.keys.map(&:camelcase).each do |o| %>
-            <%= f.radio_button :overlooking, o, label: o, custom: true, inline: true %>
-          <% end %>          
+          <% StunningView.overlookings.keys.map(&:camelcase).each.with_index do |o, index| %>
+            <% if index == 0 %>
+              <%= f.radio_button :overlooking, o.downcase, label: o, custom: true, inline: true, checked: true %>
+            <% else %>
+              <%= f.radio_button :overlooking, o.downcase, label: o, custom: true, inline: true %>
+            <% end %>
+          <% end %>
         <% end %>
         <%= f.form_group :car_access do %>
           <%= f.check_box :car_access, label: "Car Access", inline: true, custom: :switch %>
@@ -46,11 +50,12 @@
             <% end %>
             <div class="card-body">
               <h3><strong><%= stunning_view.title %></strong></h3>
+              <p class="text-muted" style="padding-left: 3px;"><%= stunning_view.reviews.length > 0 ? stunning_view.reviews.length : "No" %> Reviews</p>
               <p style="padding-left: 3px;"><%= stunning_view.description %></p>
               <% if stunning_view.user.admin? %>
-                <small class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <%= stunning_view.user.name %> <span class="site-mod site-mod-sm">Site Moderator</span></small>
+                <small class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <strong><%= stunning_view.user.name %><strong> <span class="site-mod site-mod-sm">Site Moderator</span></small>
               <% else %>
-                <small class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <%= stunning_view.user.name %></small>
+                <small class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <strong><%= stunning_view.user.name %><strong></small>
               <% end %>
             </div>
           </div>

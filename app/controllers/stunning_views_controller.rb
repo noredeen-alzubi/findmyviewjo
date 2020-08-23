@@ -70,6 +70,11 @@ class StunningViewsController < ApplicationController
     end
   end
 
+  def search
+    @stunning_views = City.find(params[:city_id]).stunning_views.where(overlooking: params[:overlooking], serviced: params[:serviced], car_access: params[:car_access], family_friendly: params[:family_friendly], free_access: params[:free_access])
+    render 'index'
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

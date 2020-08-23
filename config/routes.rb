@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get    '/signup',  to: 'users#new'
   get    '/login',   to: 'sessions#new'
+  get   '/search',  to: 'stunning_views#search'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   resources :cities, only: [:index, :destroy, :update] do
