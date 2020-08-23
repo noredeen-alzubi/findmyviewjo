@@ -21,6 +21,7 @@ class StunningViewsController < ApplicationController
     else
       @review = nil
     end
+    @reviews = @stunning_view.reviews.order created_at: :desc
   end
 
   def new

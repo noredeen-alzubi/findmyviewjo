@@ -35,7 +35,7 @@
 </div>
 <br>
 <h1 class="text-break text-center" style="overflow-wrap: break-word;"><strong><%= @stunning_view.title %></strong></h1>
-<h4 class="text-muted text-center"><%= @stunning_view.created_at.to_s(:short) %></h4>
+<h4 class="text-muted text-center"><%= @stunning_view.created_at.to_s(:month_day_comma_year) %></h4>
 <br>
 <h4 class="text-break text-center text-muted">By <%= @stunning_view.user.name %></h4>
 <% if @stunning_view.user.admin? %>
@@ -90,9 +90,9 @@
       <h5>Log in to write a review.</h5>
     <% end %>
     <br>
-    <h4 class="text-muted"><%= @stunning_view.reviews.length == 0 ? "No Reviews Submitted Yet." : "Reviews:"%></h3>
+    <h4 class="text-muted"><%= @reviews.length == 0 ? "No Reviews Submitted Yet." : "Reviews (#{@reviews.length}):"%></h3>
     <ul>
-      <% @stunning_view.reviews.each do |review| %>
+      <% @reviews.each do |review| %>
         <li>
           <% (1..review.rating).each do %>
             <%= image_tag 'star-on.png' %>
@@ -100,7 +100,7 @@
           <% (5-review.rating).times do %>
             <%= image_tag 'star-off.png' %>
           <% end %>
-          <h5 class="text-muted">By <%= review.user.name %></h5>
+          <h5 class="text-muted">By <%= review.user.name %> on <%= review.created_at.to_s(:month_day_comma_year) %></h5>
           <p class="text-break" style="overflow-wrap: break-word;"><%= review.text %></p>
         </li>
       <% end %>
