@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_22_142225) do
+ActiveRecord::Schema.define(version: 2020_08_22_152232) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -37,6 +37,17 @@ ActiveRecord::Schema.define(version: 2020_08_22_142225) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating"
+    t.text "text"
+    t.integer "user_id", null: false
+    t.integer "stunning_view_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["stunning_view_id"], name: "index_reviews_on_stunning_view_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "stunning_views", force: :cascade do |t|
@@ -69,6 +80,8 @@ ActiveRecord::Schema.define(version: 2020_08_22_142225) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "reviews", "stunning_views"
+  add_foreign_key "reviews", "users"
   add_foreign_key "stunning_views", "cities"
   add_foreign_key "stunning_views", "users"
 end

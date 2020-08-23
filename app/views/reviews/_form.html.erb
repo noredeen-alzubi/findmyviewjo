@@ -1,0 +1,25 @@
+<h3 class="text-muted">Visited? Add a Review!</h3>
+<br>
+<%= form_for [ @stunning_view, @review ] do |form| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+      <ul>
+        <% @review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <p><%= form.label :rating %>
+  <%= form.number_field :rating, {min: 1, max: 5} %>
+
+  <p><%= form.label :comment %>
+  <%= form.text_area :text, class: "form-control" %>
+  <br>
+  <%= form.submit "Submit" %>
+
+<% end %>

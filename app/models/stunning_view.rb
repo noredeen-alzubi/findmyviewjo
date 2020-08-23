@@ -13,6 +13,7 @@ class StunningView < ApplicationRecord
   enum overlooking: { city: 0, downtown: 1, skyline: 2, water: 3, countryside: 4, airport: 5, monument: 6 }
   belongs_to :city
   belongs_to :user
+  has_many :reviews, dependent: :destroy
   has_one_attached :thumbnail
   has_many_attached :images
   reverse_geocoded_by :latitude, :longitude do |stunning_view,results|

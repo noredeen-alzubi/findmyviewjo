@@ -15,6 +15,12 @@ class StunningViewsController < ApplicationController
   end
 
   def show
+    if logged_in?
+      @review = Review.new
+      @review.stunning_view_id = @stunning_view.id
+    else
+      @review = nil
+    end
   end
 
   def new

@@ -45,9 +45,13 @@
               </div>
             <% end %>
             <div class="card-body">
-              <h3><%= stunning_view.title %></h3>
+              <h3><strong><%= stunning_view.title %></strong></h3>
               <p style="padding-left: 3px;"><%= stunning_view.description %></p>
-              <small class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago</small>
+              <% if stunning_view.user.admin? %>
+                <small class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <%= stunning_view.user.name %> <span class="site-mod site-mod-sm">Site Moderator</span></small>
+              <% else %>
+                <small class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <%= stunning_view.user.name %></small>
+              <% end %>
             </div>
           </div>
         </a>

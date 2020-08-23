@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :cities, only: [:index, :destroy, :update] do
     get :autocomplete_city_name, on: :collection
   end
-  resources :stunning_views
+  resources :stunning_views do
+    resources :reviews
+  end
   resources :users, except: [:index]
 end
