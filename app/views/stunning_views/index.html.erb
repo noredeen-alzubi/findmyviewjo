@@ -21,28 +21,24 @@
       <h4 class="text-info">What kind of view are you looking for?</h4>
       <%= bootstrap_form_tag url: '/search', method: 'get', custom: true do |f| %>
         <%= f.form_group :city_id do %>
-          <%= f.collection_select :city_id, City.all, :id, :name, { label: "City:", wrapper: { class: 'has-warning' }, class: "selectpicker" } %>
+          <%= f.collection_select :city_id, City.all, :id, :name, { label: "City:", wrapper: { class: 'has-warning' }, include_blank: 'Any', class: "selectpicker" } %>
         <% end %>
         <%= f.form_group :overlooking, label: { text: "Overlooking:" } do %>
           <% StunningView.overlookings.keys.map(&:camelcase).each.with_index do |o, index| %>
-            <% if index == 0 %>
-              <%= f.radio_button :overlooking, o.downcase, label: o, custom: true, inline: true, checked: true %>
-            <% else %>
-              <%= f.radio_button :overlooking, o.downcase, label: o, custom: true, inline: true %>
-            <% end %>
+           <%= f.radio_button :overlooking, o.downcase, label: o, custom: true, inline: true %>
           <% end %>
         <% end %>
         <%= f.form_group :car_access do %>
-          <%= f.check_box :car_access, label: "Car Access", inline: true, custom: :switch %>
+          <%= f.check_box :car_access, {label: "Car Access", inline: true}, "true", "false" %>
         <% end %>
         <%= f.form_group :free_access do %>
-          <%= f.check_box :free_access, label: "Free Entry", inline: true, custom: :switch %>
+          <%= f.check_box :free_access, {label: "Free Entry", inline: true}, "true", "false" %>
         <% end %>
         <%= f.form_group :family_friendly, help: "Some Locations Are Louder & Busier Than Others." do %>
-          <%= f.check_box :family_friendly, label: "Family Friendly", inline: true, custom: :switch %>
+          <%= f.check_box :family_friendly, {label: "Family Friendly", inline: true}, "true", "false" %>
         <% end %>
         <%= f.form_group :serviced, help: "Gas, Food, & Emergency Services Within 10 Miles." do %>
-          <%= f.check_box :serviced, label: "Serviced", inline: true, custom: :switch %>
+          <%= f.check_box :serviced, {label: "Serviced", inline: true}, "true", "false" %>
         <% end %>
         <%= f.submit "Search" %>
       <% end %>
@@ -50,29 +46,35 @@
       <br>
     </div>
     <div class="col-sm-10 m-t-sm">
-      <% @stunning_views.each do |stunning_view| %>
-        <a class="card-clickable"href="<%= stunning_view_path(stunning_view) %>">
-          <div class="card card-default<%= stunning_view.featured? ? 'featured' : '' %>">
-            <div class="card-img">
-              <img src="<%= url_for(stunning_view.thumbnail) %>" class="card-img">
-            </div>
-            <% if stunning_view.featured? %>
-              <div class="card-header">
-                <strong>FEATURED</strong>
+      <% if @stunning_views.length == 0 %>
+        <div class="container text-center">
+          <h4 class="text-muted m-t-xl">No Views Match Your Request.</h4>
+        </div>
+      <% else %>
+        <% @stunning_views.each do |stunning_view| %>
+          <a class="card-clickable"href="<%= stunning_view_path(stunning_view) %>">
+            <div class="card card-default<%= stunning_view.featured? ? 'featured' : '' %>">
+              <div class="card-img">
+                <img src="<%= url_for(stunning_view.thumbnail) %>" class="card-img">
               </div>
-            <% end %>
-            <div class="card-body">
-              <h3><strong><%= stunning_view.title %></strong></h3>
-              <p class="text-muted" style="padding-left: 3px;"><%= stunning_view.reviews_count > 0 ? stunning_view.reviews_count : "No" %> Reviews</p>
-              <p style="padding-left: 3px;"><%= stunning_view.description %></p>
-              <% if stunning_view.user.admin? %>
-                <small class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <strong><%= stunning_view.user.name %></strong> <span class="site-mod site-mod-sm">Site Moderator</span></small>
-              <% else %>
-                <small class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <strong><%= stunning_view.user.name %><strong></small>
+              <% if stunning_view.featured? %>
+                <div class="card-header">
+                  <strong>FEATURED</strong>
+                </div>
               <% end %>
+              <div class="card-body">
+                <h3><strong><%= stunning_view.title %></strong></h3>
+                <p class="text-muted" style="padding-left: 3px;"><%= stunning_view.reviews_count > 0 ? stunning_view.reviews_count : "No" %> Reviews</p>
+                <% if stunning_view.user.admin? %>
+                  <p class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <strong><%= stunning_view.user.name %></strong> <span class="site-mod site-mod-sm">Site Moderator</span></small>
+                <% else %>
+                  <p class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <strong><%= stunning_view.user.name %><strong></small>
+                <% end %>
+                <p style="padding-left: 3px;"><%= stunning_view.description %></p>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+        <% end %>
       <% end %>
     </div>
   </div>

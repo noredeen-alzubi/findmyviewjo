@@ -80,7 +80,7 @@ class StunningViewsController < ApplicationController
   end
 
   def search
-    @stunning_views = City.find(params[:city_id]).stunning_views.where(overlooking: params[:overlooking], serviced: params[:serviced], car_access: params[:car_access], family_friendly: params[:family_friendly], free_access: params[:free_access])
+    @stunning_views = StunningView.where(search_params)
     render 'index'
   end
 
@@ -105,5 +105,11 @@ class StunningViewsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def stunning_view_params
     params.require(:stunning_view).permit(:title, :description, :car_access, :latitude, :longitude, :free_access, :overlooking, :serviced, :family_friendly, :user_id, :thumbnail, images: [])
+  end
+
+  # Remove false and empty tags
+  def search_params
+    # TODO: This is hacky and buggy. Wrap the relevent stuff inside a hash within params.
+    params.permit(:city_id, :overlooking, :car_access, :serviced, :family_friendly, :free_access).delete_if { |_, value| value.empty? || value == 'false' }.except(:controller, :commit, :action)
   end
 end
