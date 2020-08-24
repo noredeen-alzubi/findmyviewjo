@@ -4,7 +4,7 @@ class StunningViewsController < ApplicationController
 
   def index
     params[:sort] ||= 'created_at'
-    order_by = ["stunning_views.? DESC", params[:sort]]
+    order_by = "stunning_views.#{params[:sort]} DESC"
     if params[:city_id].present?
       @stunning_views = City.find_by(id: params[:city_id]).stunning_views.order created_at: :desc
     elsif params[:longitude].present? && params[:latitude].present?
