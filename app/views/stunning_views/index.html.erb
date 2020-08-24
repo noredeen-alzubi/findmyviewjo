@@ -40,7 +40,7 @@
         <%= f.form_group :serviced, help: "Gas, Food, & Emergency Services Within 10 Miles." do %>
           <%= f.check_box :serviced, {label: "Serviced", inline: true}, "true", "false" %>
         <% end %>
-        <%= f.submit "Search" %>
+        <%= f.submit "Search", name: nil %>
       <% end %>
       <br>
       <br>

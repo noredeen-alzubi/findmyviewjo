@@ -3,7 +3,7 @@
 @import "bootstrap";
 
 $featured-bottom-gradient-color: #b4ffe8;
-$featured-top-gradient-color: #cd80af;
+$featured-top-gradient-color: #fcbcbc;
 
 .title, .subtitle, .city-search-text{
   color: white !important;
@@ -80,14 +80,15 @@ div.embed-responsive button{
 .carousel.featured{
   border-left: 5px solid $featured-bottom-gradient-color;
   border-right: 5px solid $featured-bottom-gradient-color;
-  border-bottom: 5px solid $featured-bottom-gradient-color;
+  border-bottom: 7px solid $featured-bottom-gradient-color;
 }
 
 div.view-featured{
   display:block;
   margin: 0;
   text-align: center;
-  color: yellow;
+  color: blueviolet;
+  padding: 0.75rem;
   border-radius: 0;
   background: $featured-top-gradient-color;
   background: linear-gradient(180deg, $featured-top-gradient-color 0%, $featured-bottom-gradient-color 100%);
