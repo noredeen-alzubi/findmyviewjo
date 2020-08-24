@@ -83,11 +83,11 @@ div.embed-responsive button{
   border-bottom: 5px solid $featured-bottom-gradient-color;
 }
 
-div.featured{
+div.view-featured{
   display:block;
   margin: 0;
   text-align: center;
-  color: white;
+  color: yellow;
   border-radius: 0;
   background: $featured-top-gradient-color;
   background: linear-gradient(180deg, $featured-top-gradient-color 0%, $featured-bottom-gradient-color 100%);
@@ -105,6 +105,12 @@ div.featured{
 
 .card.featured{
   border-color: goldenrod;
+  border-width: thin;
+  border-style: solid;
+}
+
+.featured-text{
+  color: white;
 }
 
 .card-clickable, .card-clickable:hover{

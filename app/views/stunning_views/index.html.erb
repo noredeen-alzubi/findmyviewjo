@@ -14,7 +14,7 @@
       <br>
       <%= bootstrap_form_tag url: '/stunning_views', method: 'get', html: {id: 'sort-form'} do |f| %>
         <%= f.form_group :sort do %>
-          <%= f.select :sort, [["Most Recent", "created_at"], ["Most Reviewed", "reviews_count"]], label: "Sorting By:", selected: params[:sort] %>
+          <%= f.select :sort, [["Most Recent", "created_at"], ["Most Reviewed", "reviews_count"], ["Featured", "featured"]], label: "Sorting By:", selected: params[:sort] %>
         <% end %>
       <% end %>
       <br>
@@ -53,13 +53,13 @@
       <% else %>
         <% @stunning_views.each do |stunning_view| %>
           <a class="card-clickable"href="<%= stunning_view_path(stunning_view) %>">
-            <div class="card card-default<%= stunning_view.featured? ? 'featured' : '' %>">
+            <div class="card card-default <%= stunning_view.featured? ? 'featured' : '' %>">
               <div class="card-img">
                 <img src="<%= url_for(stunning_view.thumbnail) %>" class="card-img">
               </div>
               <% if stunning_view.featured? %>
                 <div class="card-header">
-                  <strong>FEATURED</strong>
+                  <strong class="featured-text">FEATURED</strong>
                 </div>
               <% end %>
               <div class="card-body">

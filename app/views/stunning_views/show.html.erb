@@ -2,8 +2,8 @@
   <div class="alert alert-<%= message_type %>"><%= message %></div>
 <% end %>
 <% if @stunning_view.featured? %>
-  <div class="container-fluid featured m-t-lg">
-    <h4>🌟 <strong>FEATURED</strong></h4>
+  <div class="container-fluid view-featured m-t-lg">
+    <h4>🌟 <strong>FEATURED</strong> 🌟</h4>
   </div>
 <% end %>
 <div id="images-carousel" class="carousel slide<%= @stunning_view.featured? ?  " featured" : "" %>" data-ride="carousel">
