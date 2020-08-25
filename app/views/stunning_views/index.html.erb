@@ -62,15 +62,15 @@
                   <strong class="featured-text">FEATURED</strong>
                 </div>
               <% end %>
-              <div class="card-body">
+              <div class="card-body" style="overflow: hidden; display: inline-block; white-space: nowrap; max-width: 100%;">
                 <h3><strong><%= stunning_view.title %></strong></h3>
                 <p class="text-muted" style="padding-left: 3px;"><%= stunning_view.reviews_count > 0 ? stunning_view.reviews_count : "No" %> Reviews</p>
                 <% if stunning_view.user.admin? %>
-                  <p class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <strong><%= stunning_view.user.name %></strong> <span class="site-mod site-mod-sm">Site Moderator</span></small>
+                  <p class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <strong><%= stunning_view.user.name %></strong> <span class="site-mod site-mod-sm">Site Moderator</span></p>
                 <% else %>
-                  <p class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <strong><%= stunning_view.user.name %><strong></small>
+                  <p class="text-muted" style="padding-left: 3px;">Posted <%= distance_of_time_in_words(Time.now, stunning_view.created_at) %> ago by <strong><%= stunning_view.user.name %><strong></p>
                 <% end %>
-                <p style="padding-left: 3px;"><%= stunning_view.description %></p>
+                <p style="padding-left: 3px; text-overflow: ellipsis; overflow: hidden; width: calc(100%); white-space: nowrap; display: inline-block;"><%= stunning_view.description %></p>
               </div>
             </div>
           </a>
