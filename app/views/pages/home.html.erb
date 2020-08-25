@@ -7,6 +7,7 @@
       $('[data-toggle="tooltip"]').tooltip('destroy')
       $("#latitude").val(position.coords.latitude);
       $("#longitude").val(position.coords.longitude);
+      console.log(position)
     }
 
     function handleErrors(error){
@@ -53,9 +54,9 @@
         <div class="col-md-4 col-md-offset-4">
           <div class="overlay rounded"></div>
           <div class="city-search m-t-xl m-b-xl">
-            <%= form_with url: stunning_views_path, method: 'get' do |form| %>
+            <%= form_with url: stunning_views_path, method: :get, local: true, id: "form-nearby" do |form| %>
               <span class="tooltip-wrapper" data-toggle="tooltip" data-placement="top" title="You need to consent to giving us access to your location data.">
-                <%= button_tag class: "btn btn-lg btn-info main mr-2", id: "nearby" do %>
+                <%= button_tag form: "form-nearby", type: "submit", class: "btn btn-lg btn-info main mr-2", id: "nearby" do %>
                   Find Nearby <i class="fas fa-map-marker-alt"></i>
                 <% end %>
               </span>

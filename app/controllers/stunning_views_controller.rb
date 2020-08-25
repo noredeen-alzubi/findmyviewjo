@@ -8,7 +8,7 @@ class StunningViewsController < ApplicationController
     if params[:city_id].present?
       @stunning_views = City.find_by(id: params[:city_id]).stunning_views.order created_at: :desc
     elsif params[:longitude].present? && params[:latitude].present?
-      flash.now[:info] = 'Showing views near you.'
+      flash.now[:info] = 'Showing views within 50 miles.'
       @stunning_views = StunningView.near([params[:latitude], params[:longitude]], 50).order created_at: :desc
     else
       @stunning_views = StunningView.order order_by

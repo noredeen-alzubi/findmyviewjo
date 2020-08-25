@@ -12,6 +12,10 @@
   <div class="row">
     <div class="col-sm-2">
       <br>
+      <% if params[:longitude].present? %>
+        <h4 class="text-success"><strong><em>> Searching with your location.</em></strong> <%= link_to "Reset", stunning_views_path %></h4>
+        <br>
+      <% end %>
       <%= bootstrap_form_tag url: '/stunning_views', method: 'get', html: {id: 'sort-form'} do |f| %>
         <%= f.form_group :sort do %>
           <%= f.select :sort, [["Most Recent", "created_at"], ["Most Reviewed", "reviews_count"], ["Featured", "featured"]], label: "Sorting By:", selected: params[:sort] %>
