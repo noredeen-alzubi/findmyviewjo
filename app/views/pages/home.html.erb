@@ -43,6 +43,9 @@
 
   });
 </script>
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
 <div class="jumbotron">
   <div class="col d-flex flex-column">
     <div class="container">

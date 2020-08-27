@@ -96,7 +96,7 @@ class StunningViewsController < ApplicationController
   def authorized
     if !logged_in?
       redirect_to root_path
-    elsif !current_user.admin?
+    elsif !current_user.admin? && !current_user.local_guide?
       flash[:danger] = 'You are not authorized to access this page.'
       redirect_to root_path
     end
